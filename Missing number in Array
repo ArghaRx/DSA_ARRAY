@@ -35,3 +35,29 @@ class Solution {
         
     }
 }
+
+
+**BETTER
+a[] = {1,2,4,5};;;;;;N=5(Size)
+
+class Solution {
+    int missingNumber(int array[], int n) {
+        // Your Code Here
+        
+        
+
+       int hash[]=new int[n+1];
+       for(int i=0;i<n-1;i++)
+       {
+           hash[array[i]]++;
+       }
+       for (int j=1;j<=n;j++)
+       {
+           if(hash[j]==0)
+           {
+               return j;
+           }
+       }
+       return -1;
+    }
+}
