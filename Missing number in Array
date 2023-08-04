@@ -1,5 +1,6 @@
 # Optimal Approach
 //XOR
+// a[]={0,1,3}
 
 class Solution {
     public int missingNumber(int[] nums) {
@@ -19,10 +20,11 @@ class Solution {
 }
 
 //SUM
+// a[]={0,1,3}
 
 class Solution {
     public int missingNumber(int[] nums) {
-       int n=nums.length;
+       int n=nums.length; //From here legth of array is 3
         int sum=(n*(n+1))/2;
         int s=0;
         for(int i=0;i<n;i++)
