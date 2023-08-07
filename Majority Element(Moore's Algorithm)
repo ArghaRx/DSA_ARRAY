@@ -21,7 +21,6 @@ class Solution {
    {
       
        if(element==nums[i]) count2++;
-       
    }
    if (count2>nums.length/2) return element;
   return -1;
