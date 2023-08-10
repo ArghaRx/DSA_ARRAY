@@ -1,4 +1,4 @@
-Moore's Algo*****Optimal
+Moore's VOTIMG Algo   *****Optimal
 
 class Solution {
     public int majorityElement(int[] nums) {
