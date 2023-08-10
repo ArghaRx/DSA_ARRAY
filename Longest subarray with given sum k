@@ -5,9 +5,9 @@ public class Solution {
     public static int longestSubarrayWithSumK(int []a, long k) {
         // Write your code here
          int n = a.length;
-          // size of the array.
+                     // size of the array.
 
-        int len = 0;
+        int maxlen = 0;
         for (int i = 0; i < n; i++) {
             long s = 0; // starting index
              // Sum variable
@@ -23,5 +23,59 @@ public class Solution {
              }
         }
         return len;
+    }
+
+
+****BETTER***
+
+public class Solution {
+    public static int longestSubarrayWithSumK(int []a, long k) {
+        // Write your code here
+        int maxlength=0;
+        for(int i=0;i<a.length;i++)
+        {
+            for(int j=i;j<a.length;j++)
+            {
+                int sum=0;
+                for(int x=i;x<=j;x++)
+                  sum+=a[x];
+                if(sum==k) 
+                  maxlength=Math.max(maxlength,j-i+1);
+            }
+        }
+        return maxlength;
+    }
+}
+
+
+*****OPTOMAL*****
+
+public class Solution {
+    public static int longestSubarrayWithSumK(int []a, long k) {
+        // Write your code here
+        int right=0,left=0;
+        int sum=a[0];
+        int maxlength=0;
+        while (right < a.length )
+        {
+            if( left<=right && sum>k)
+            {
+               sum-=a[left];
+               left++; 
+            }
+            if(sum==k)
+            
+                maxlength=Math.max(maxlength,right-left+1);
+                
+              right++;
+            
+            if(right<a.length)
+            {
+               sum+=a[right]; 
+            }
+            
+            
+        }
+        return maxlength;
     }
 }
