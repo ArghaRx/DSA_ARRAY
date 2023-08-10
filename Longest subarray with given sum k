@@ -4,26 +4,24 @@
 public class Solution {
     public static int longestSubarrayWithSumK(int []a, long k) {
         // Write your code here
-         int n = a.length;
-                     // size of the array.
+        int maxlength=0;
+        for(int i=0;i<a.length;i++)
+        {
+            for(int j=i;j<a.length;j++)
+            {
+                int sum=0;
+                for(int x=i;x<=j;x++){
 
-        int maxlen = 0;
-        for (int i = 0; i < n; i++) {
-            long s = 0; // starting index
-             // Sum variable
-            for (int j = i; j < n; j++)
-             { 
-                // ending index
-                            // add the current element to
-                               // the subarray a[i...j-1]:
-                s += a[j];
+                  sum+=a[x];
+               }
 
-                if (s == k)
-                    len = Math.max(len, j - i + 1);
-             }
+                     if(sum==k) 
+                  maxlength=Math.max(maxlength,j-i+1);
+            }
         }
-        return len;
+        return maxlength;
     }
+}
 
 
 ****BETTER***
@@ -34,14 +32,14 @@ public class Solution {
         int maxlength=0;
         for(int i=0;i<a.length;i++)
         {
+             int sum=0;
             for(int j=i;j<a.length;j++)
             {
-                int sum=0;
-                for(int x=i;x<=j;x++)
-                  sum+=a[x];
+              sum+=a[j];
+               
                 if(sum==k) 
-                  maxlength=Math.max(maxlength,j-i+1);
-            }
+                  maxlength=Math.max(maxlength,j-i+1);  
+            }          
         }
         return maxlength;
     }
@@ -53,29 +51,27 @@ public class Solution {
 public class Solution {
     public static int longestSubarrayWithSumK(int []a, long k) {
         // Write your code here
-        int right=0,left=0;
-        int sum=a[0];
-        int maxlength=0;
-        while (right < a.length )
-        {
-            if( left<=right && sum>k)
-            {
-               sum-=a[left];
-               left++; 
+        int n=a.length,left=0,right=0,maxLen=0;
+        long sum=a[0];
+
+        while (right < n) {
+                                   // if sum > k, reduce the subarray from left
+                                     // until sum becomes less or equal to k:
+            while (left <= right && sum > k) {
+                sum -= a[left];
+                left++;
             }
-            if(sum==k)
-            
-                maxlength=Math.max(maxlength,right-left+1);
-                
-              right++;
-            
-            if(right<a.length)
-            {
-               sum+=a[right]; 
+
+                                 // if sum = k, update the maxLen i.e. answer:
+            if (sum == k) {
+                maxLen = Math.max(maxLen, right - left + 1);
             }
-            
-            
+
+                                // Move forward thw right pointer:
+            right++;
+            if (right < n) sum += a[right];
         }
-        return maxlength;
+
+        return maxLen;
     }
 }
