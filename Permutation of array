@@ -8,7 +8,8 @@ class Solution {
 
         // Find the break point
         for (int i = n - 2; i >= 0; i--) {
-            if (nums[i] < nums[i + 1]) {
+            if (nums[i] < nums[i + 1]) 
+            {
                 index = i;
                 break;
             }
