@@ -48,30 +48,44 @@ public class Solution {
 
 *****OPTOMAL*****
 
+import java.util.* ;
+import java.io.*; 
 public class Solution {
-    public static int longestSubarrayWithSumK(int []a, long k) {
-        // Write your code here
-        int n=a.length,left=0,right=0,maxLen=0;
-        long sum=a[0];
+	public static int getLongestSubarray(int []nums, int k) {
+		// Write your code here.
+		Map <Integer,Integer> map=new HashMap<>();
+		int n=nums.length;
+		int maxlen=0;
+		int sum = 0;
+		for(int i=0;i<n;i++)
+		{
+			// calculate sum
+			sum += nums[i];
+			
+			 //if sum is equal to k
+			if( sum == k )
+			maxlen = Math.max(maxlen,i+1);
 
-        while (right < n) {
-                                   // if sum > k, reduce the subarray from left
-                                     // until sum becomes less or equal to k:
-            while (left <= right && sum > k) {
-                sum -= a[left];
-                left++;
-            }
-
-                                 // if sum = k, update the maxLen i.e. answer:
-            if (sum == k) {
-                maxLen = Math.max(maxLen, right - left + 1);
-            }
-
-                                // Move forward thw right pointer:
-            right++;
-            if (right < n) sum += a[right];
-        }
-
-        return maxLen;
-    }
+            // find rem = i - k;
+			int rem = sum - k ;
+			
+			// if rem contains in map
+			if(map.containsKey(rem))
+			{
+				// calculate length
+				int len = i - map.get(rem);
+				// again put in map as Math.max condition
+				maxlen = Math.max(maxlen,len);
+			}
+			//otherwise
+			// chech if the sum is contains in map or not
+			
+			if(!map.containsKey(sum))
+			 map.put(sum,i);
+		}
+		return maxlen;
+	}
 }
+
+Time Complexity: O(N) or O(N*logN) depending on which map data structure we are using, where N = size of the array.
+Space Complexity: O(N) as we are using a map data structure.
